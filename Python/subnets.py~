@@ -11,20 +11,20 @@ def validateIP(octetOne, octetTwo, octetThree, octetFour):
 
 def octetMath(octetIP, octetNum, subnetMask):
     subnetArray = []
-    if (float(subnetMask) / float(octetNum)) > 8:                               #If this octet is inside the mask, return the octet as-is
+    if (float(subnetMask) / float(octetNum)) > 8:
         subnetArray.append(octetIP)
         subnetArray.append(octetIP)
         return subnetArray
     else:
-        if (subnetMask - (8 * (octetNum-1))) <= 0:                              #If this octet is partially or completely outside the mask
-        #not (subnetMask - (8 * octetNum)) % 8 or                               #Completely outside, return the full range
+        if (subnetMask - (8 * (octetNum-1))) <= 0:
+        #not (subnetMask - (8 * octetNum)) % 8 or
             subnetArray.append(0)
             subnetArray.append(255)
             return subnetArray
         else:
-            ipNums = (2**(((8*octetNum)-subnetMask)%8))                         #2 to the power of the masked bits gives us a range
-            subnetArray.append(ipNums * (octetIP / ipNums))                     #Int division to give us a low number
-            subnetArray.append(ipNums * (octetIP / ipNums) + (ipNums - 1))      #Low number plus range for the high number
+            ipNums = (2**(((8*octetNum)-subnetMask)%8))
+            subnetArray.append(ipNums * (octetIP / ipNums))
+            subnetArray.append(ipNums * (octetIP / ipNums) + (ipNums - 1))
             return subnetArray
 
 
